@@ -7,7 +7,7 @@ var Fact = require('./Logics/Fact'),
     RegularExpressions = require('./RegularExpressions'),
     Utils = require('./Utils');
 
-var rdfext = require('rdf-ext')(),
+var rdfext = require('rdf-ext'),
     q = require('q'),
     sparqlJs = require('sparqljs'),
 
