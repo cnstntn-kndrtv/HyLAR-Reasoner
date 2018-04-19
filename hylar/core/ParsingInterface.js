@@ -11,8 +11,8 @@ var rdfext = require('rdf-ext'),
     q = require('q'),
     sparqlJs = require('sparqljs'),
 
-    SparqlParser = new sparqlJs.Parser(),
-    RdfXmlParser = new rdfext.RdfXmlParser();
+    SparqlParser = new sparqlJs.Parser();
+    //RdfXmlParser = new rdfext.RdfXmlParser();
 
 /**
  * The parsing interface, for transforming facts, triples, turtle or even results bindings
@@ -44,19 +44,21 @@ String.prototype.format = function() {
      */
 ParsingInterface = {
     rdfXmlToTurtle: function(data) {
-        var deferred = q.defer(), triple;
-        RdfXmlParser.parse(data, function(parsed, err) {
-            if(err) deferred.reject(err);
+        console.log('💩');
+        
+        // var deferred = q.defer(), triple;
+        // RdfXmlParser.parse(data, function(parsed, err) {
+        //     if(err) deferred.reject(err);
 
-            var triples = parsed._graph,
-                turtle = '';
-            for (var i = 0; i < triples.length; i++) {
-                triple = triples[i];
-                turtle += triple + '\n';
-            }
-            deferred.resolve(turtle);
-        });
-        return deferred.promise;
+        //     var triples = parsed._graph,
+        //         turtle = '';
+        //     for (var i = 0; i < triples.length; i++) {
+        //         triple = triples[i];
+        //         turtle += triple + '\n';
+        //     }
+        //     deferred.resolve(turtle);
+        // });
+        // return deferred.promise;
     },
 
     /**
