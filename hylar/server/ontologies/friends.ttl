@@ -1,0 +1,5 @@
+@prefix foaf: <http://friends.com#> .
+@prefix : <http://ex.com#> .
+
+:a foaf:friend :b .
+# :b foaf:friend :c .

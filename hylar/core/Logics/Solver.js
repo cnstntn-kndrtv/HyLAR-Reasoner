@@ -5,6 +5,7 @@
 var Fact = require('./Fact');
 var Logics = require('./Logics');
 var Utils = require('../Utils');
+var RegularExpressions = require('../RegularExpressions');
 
 var emitter = require('../Emitter');
 
@@ -62,9 +63,17 @@ Solver = {
             for (var i = 0; i < mappingList.length; i++) {
                 if (mappingList[i]) {
                     // Replace mappings on all consequences
-                    for (var j = 0; j < rule.consequences.length; j++) {                        
-                        consequences.push(this.substituteFactVariables(mappingList[i], rule.consequences[j], [], rule));
-                        
+                    for (var j = 0; j < rule.consequences.length; j++) {
+                        let consequence = rule.consequences[j];
+                        // check if consequence subject unique (matches :UNIQUE)
+                        if (consequence.subject.search(RegularExpressions.UNIQUE_SUBJECT) != -1) {
+                            let newCons = Object.assign({}, consequence);
+                            newCons.subject = rule.name + '-' + i;
+                            consequences.push(this.substituteFactVariables(mappingList[i], newCons, [], rule));
+                        }
+                        else {
+                            consequences.push(this.substituteFactVariables(mappingList[i], consequence, [], rule));
+                        }
                     }
                 }
             }

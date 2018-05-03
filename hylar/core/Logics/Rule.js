@@ -3,6 +3,7 @@
  */
 
 var Utils = require('../Utils');
+var uniqid = require('uniqid');
 
 /**
  * Rule in the form subClassOf(a, b) ^ subClassOf(b, c) -> subClassOf(a, c)
@@ -12,7 +13,7 @@ var Utils = require('../Utils');
  * @constructor
  */
 Rule = function(slf, srf, name) {
-    this.name = name;
+    this.name = name || uniqid();
     this.causes = [];
     this.operatorCauses = [];
     this.consequences = srf;
